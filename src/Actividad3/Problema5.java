@@ -10,9 +10,7 @@ public class Problema5 {
         BufferedReader leer = new BufferedReader(new InputStreamReader(System.in));
         float capital = Float.parseFloat(leer.readLine()), interes = Float.parseFloat(leer.readLine());
         int cantidadAños = Integer.parseInt(leer.readLine());
-        for (int i = 0; i < cantidadAños; i++) {
-            capital += capital * interes;
-        }
+        capital += capital * interes *cantidadAños;
         System.out.println("El Capital en " + cantidadAños + " se habra convertido en: " + capital);
     }
 }
