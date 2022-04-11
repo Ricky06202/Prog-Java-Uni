@@ -24,22 +24,22 @@ public class Problema4 {
         int año = Integer.parseInt(fecha.substring(fecha.indexOf("/")+1));
         dia++;
         int cantidadDiasPorMes;
-        int cantidadMesesPorAño = 13;
+        int cantidadMesesPorAño = 12;
         if (mes == 2)
             if(año % 4 == 0)
-                cantidadDiasPorMes = 30;
-            else
                 cantidadDiasPorMes = 29;
+            else
+                cantidadDiasPorMes = 28;
         else if (mes <= 7 && mes % 2 == 1 || mes >= 8 && mes % 2 == 0)
-            cantidadDiasPorMes = 32;
-        else
             cantidadDiasPorMes = 31;
-        if(dia >= cantidadDiasPorMes){
-            dia = 1 + dia % cantidadDiasPorMes;
+        else
+            cantidadDiasPorMes = 30;
+        if(dia > cantidadDiasPorMes){
+            dia = dia % cantidadDiasPorMes;
             mes++;
-            if (mes >= cantidadMesesPorAño){
-                año += mes / 12;
-                mes = 1 + mes % cantidadMesesPorAño;
+            if (mes > cantidadMesesPorAño){
+                año += mes / cantidadMesesPorAño;
+                mes = mes % cantidadMesesPorAño;
             }
         }
         System.out.println(dia + "/" + mes + "/" + año);
