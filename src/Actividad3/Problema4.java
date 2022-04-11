@@ -24,7 +24,7 @@ public class Problema4 {
         int año = Integer.parseInt(fecha.substring(fecha.indexOf("/")+1));
         dia++;
         int cantidadDiasPorMes;
-        int cantidadMesesPorAño = 12;
+        final int cantidadMesesPorAño = 12;
         if (mes == 2)
             if(año % 4 == 0)
                 cantidadDiasPorMes = 29;
