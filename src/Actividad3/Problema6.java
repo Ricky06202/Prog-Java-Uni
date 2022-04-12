@@ -6,7 +6,8 @@ import java.io.InputStreamReader;
 //import java.text.DateFormatSymbols;
 
 public class Problema6 {
-    // Dada una fecha en formato día/mes/año determinar el número de días y el nombre del mes de dicha fecha, y sacar por pantalla la fecha convertida a formato de día “de” mes “de” año.
+    // Dada una fecha en formato día/mes/año determinar el número de días y el nombre del mes de dicha fecha,
+    // y sacar por pantalla la fecha convertida a formato de día “de” mes “de” año.
     public static void main(String[] args) throws IOException {
         BufferedReader leer = new BufferedReader(new InputStreamReader(System.in));
         String fecha = leer.readLine(); // 10/3/2010
