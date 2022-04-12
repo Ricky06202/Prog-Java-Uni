@@ -17,9 +17,9 @@ public class Problema2 {
             if (num > 0)
                 totalPositivos++;
             if (num % 2 == 0)
-                totalPares++;
+                totalPares += num;
         }
-        System.out.println("Total de Numeros Pares = " + totalPares);
+        System.out.println("Suma de Numeros Pares = " + totalPares);
         System.out.println("Total de Numeros Positivos = " + totalPositivos);
     }
 }
