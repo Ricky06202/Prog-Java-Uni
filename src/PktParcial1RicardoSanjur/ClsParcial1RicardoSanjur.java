@@ -51,13 +51,13 @@ public class ClsParcial1RicardoSanjur {
         //asignamos la cantidad de balboas adicionales segun la cantidad de faltas
         final float balboasAdicionales;
         if(tiene0Faltas)
-            balboasAdicionales = 185f;
+            balboasAdicionales = 185;
         else if (tiene1Falta)
-            balboasAdicionales = 120f;
+            balboasAdicionales = 120;
         else if (tiene2Faltas)
-            balboasAdicionales = 90f;
+            balboasAdicionales = 90;
         else if (tiene3Faltas)
-            balboasAdicionales = 30f;
+            balboasAdicionales = 30;
         else
             balboasAdicionales = 0;
         //calculamos el sueldo neto y el sueldo integrado
