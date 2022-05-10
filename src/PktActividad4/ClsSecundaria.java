@@ -1,5 +1,7 @@
 package PktActividad4;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Scanner;
 
 public class ClsSecundaria {
@@ -12,7 +14,7 @@ public class ClsSecundaria {
         int cantidadDeMeses = (int)mtdLeerFlotantePositivo();
         final float porcentajeMensual = 0.02f;
         float dineroGanado = capital * porcentajeMensual * cantidadDeMeses;
-        System.out.printf("La Cantidad de dinero ganada sera de: %.2f", dineroGanado);
+        System.out.printf("La Cantidad de dinero ganada sera de: %.2f\n", dineroGanado);
     }
 
     void mtdComisionDelVendedor(){
@@ -28,8 +30,8 @@ public class ClsSecundaria {
             totalComisiones += mtdLeerFlotantePositivo() * porcentajeExtra;
         }   
         sueldo += totalComisiones;
-        System.out.printf("El total obtenido por las comisiones es de: %.2f", totalComisiones);
-        System.out.printf("El total que obtendra en el mes sera de: %.2f", sueldo);
+        System.out.printf("El total obtenido por las comisiones es de: %.2f\n", totalComisiones);
+        System.out.printf("El total que obtendra en el mes sera de: %.2f\n", sueldo);
     }
 
     void mtdTotalDeLaCompra(){
@@ -37,7 +39,7 @@ public class ClsSecundaria {
         float totalDeCompras = mtdLeerFlotantePositivo();
         final float porcentajeDeDescuento = 0.15f;
         totalDeCompras -= totalDeCompras * porcentajeDeDescuento;
-        System.out.printf("Con el Descuento del 15% aplicado, debera pagar: %.2f", totalDeCompras);
+        System.out.printf("Con el Descuento del 15% aplicado, debera pagar: %.2f\n", totalDeCompras);
     }
 
     void mtdCalificacionFinal(){
@@ -58,11 +60,53 @@ public class ClsSecundaria {
         promedioParciales *= porcentajeParciales;
         notaExamenFinal *= porcentajeExamenFinal;
         notaTrabajoFinal *= porcentajeTrabajoFinal;
+        float calificacionFinal = promedioParciales + notaExamenFinal + notaTrabajoFinal;
         System.out.println("//Calificacion Obtenida en Cada Subdivicion\\\\");
-        System.out.printf("Parciales.........: %.2f%",promedioParciales);
-        System.out.printf("Examen Final......: %.2f%",notaExamenFinal);
-        System.out.printf("Trabajo Final.....: %.2f%",notaTrabajoFinal);
-        System.out.printf("Calificacion Final: %.2f%",notaTrabajoFinal);
+        System.out.printf("Parciales.........: %.2f%%\n",promedioParciales);
+        System.out.printf("Examen Final......: %.2f%%\n",notaExamenFinal);
+        System.out.printf("Trabajo Final.....: %.2f%%\n",notaTrabajoFinal);
+        System.out.printf("Calificacion Final: %.2f%%\n",calificacionFinal);
+    }
+
+    void mtdPorcentajeDeGenero(){
+        System.out.print("Ingrese la cantidad de hombres: ");
+        int cantidadDeHombres = (int)mtdLeerFlotantePositivo();
+        System.out.print("Ingrese la cantidad de Mujeres: ");
+        int cantidadDeMujeres = (int)mtdLeerFlotantePositivo();
+        float totalDeEstudiantes = cantidadDeHombres + cantidadDeMujeres;
+        System.out.printf("El Porcentaje de Hombres del grupo es de: %.2f\n",cantidadDeHombres / totalDeEstudiantes * 100);
+        System.out.printf("El Porcentaje de Mujeres del grupo es de: %.2f\n",cantidadDeMujeres / totalDeEstudiantes * 100);
+    }
+
+    void mtdCalculoDeLaEdadExacta(){
+        System.out.print("Ingrese la fecha de hoy (formato dd/mm/aaaa): ");
+        String fechaDeHoy = objLeer.nextLine();
+        // separamos los dias meses y años de la cadena leida
+        int diaDeHoy = obtenerPrimerNumeroDe(fechaDeHoy);
+        fechaDeHoy = recortarHastaLaDiagonal(fechaDeHoy);
+        int mesDeHoy = obtenerPrimerNumeroDe(fechaDeHoy);
+        fechaDeHoy = recortarHastaLaDiagonal(fechaDeHoy);
+        int añoDeHoy = obtenerPrimerNumeroDe(fechaDeHoy);
+        System.out.print("Ingrese su cumpleaños (formato dd/mm/aaaa): ");
+        String fechaDeCumpleaños = objLeer.nextLine();
+        // separamos los dias meses y años de la cadena leida
+        int diaDeCumpleaños = obtenerPrimerNumeroDe(fechaDeCumpleaños);
+        fechaDeCumpleaños = recortarHastaLaDiagonal(fechaDeCumpleaños);
+        int mesDeCumpleaños = obtenerPrimerNumeroDe(fechaDeCumpleaños);
+        fechaDeCumpleaños = recortarHastaLaDiagonal(fechaDeCumpleaños);
+        int añoDeCumpleaños = obtenerPrimerNumeroDe(fechaDeCumpleaños);
+
+        Period objEdadExacta = Period.between(LocalDate.of(añoDeCumpleaños, mesDeCumpleaños, diaDeCumpleaños), LocalDate.of(añoDeHoy,mesDeHoy,diaDeHoy));
+
+        System.out.printf("La edad exacta es: %d años %d meses %d días\n", objEdadExacta.getYears(), objEdadExacta.getMonths(), objEdadExacta.getDays() - 1);
+    }
+
+    private String recortarHastaLaDiagonal(String fecha){
+        return fecha.substring(fecha.indexOf("/") + 1);
+    }
+
+    private int obtenerPrimerNumeroDe(String fecha){
+        return Integer.parseInt(fecha.substring(0, fecha.contains("/") ? fecha.indexOf("/") : fecha.length()));
     }
 
     private float mtdLeerFlotantePositivo(){
@@ -71,6 +115,7 @@ public class ClsSecundaria {
             if(flotantePositivo > 0)
                 return flotantePositivo;
             System.out.println("**ERROR: Debe ser Positivo**");
+            System.out.print("Ingreselo Nuevamente: ");
         }
     }
 
@@ -80,6 +125,7 @@ public class ClsSecundaria {
             if(nota <= 100)
                 return nota;
             System.out.println("**ERROR: No Puede ser mayor a 100**");
+            System.out.print("Ingreselo Nuevamente: ");
         }
     }
 }
