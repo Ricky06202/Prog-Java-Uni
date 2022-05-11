@@ -104,12 +104,82 @@ public class ClsSecundaria {
         fechaDeCumpleaños = recortarHastaLaDiagonal(fechaDeCumpleaños);
         int añoDeCumpleaños = obtenerPrimerNumeroDe(fechaDeCumpleaños);
 
+        int diasDehoy = diaDeHoy + añoDeHoy * 365;
+        diasDehoy += mtdCacularDiasDeLosMeses(mesDeHoy);
+        int diasDeCumpleaños = diaDeCumpleaños + añoDeCumpleaños * 365;
+        diasDeCumpleaños += mtdCacularDiasDeLosMeses(mesDeCumpleaños);
+        
+        int dias = diasDehoy - diasDeCumpleaños;
+        int años = dias / 365;
+        dias %= 365;
+        int meses = mtdCalcularMesesDeLosDias(dias);
+        dias %= mtdCalcularDiasRestantesDeLosMeses(dias);
+
+        System.out.printf("\n\nLa edad exacta es: %d años %d meses %d días\n", años, meses, dias);
+
         Period objEdadExacta = Period.between(
             LocalDate.of(añoDeCumpleaños, mesDeCumpleaños, diaDeCumpleaños), 
             LocalDate.of(añoDeHoy,mesDeHoy,diaDeHoy));
 
         System.out.printf("\n\nLa edad exacta es: %d años %d meses %d días\n", 
         objEdadExacta.getYears(), objEdadExacta.getMonths(), objEdadExacta.getDays() - 1);
+    }
+
+    private int mtdCalcularMesesDeLosDias(int dias){
+        int cantDias;
+        for (int mes = 1; mes <= 12; mes++) {
+            final boolean esFebrero = mes == 2;
+            final boolean tiene31 = mes <= 7 && mes % 2 == 1 || mes >= 8 && mes % 2 == 0;
+            if(esFebrero)
+                cantDias = 28;
+            else if(tiene31)
+                cantDias = 31;
+            else
+                cantDias = 30;
+            if (dias >= cantDias) 
+                  dias -= cantDias;
+            else
+                return mes - 1;
+            
+        }
+        return 0;
+    }
+
+    private int mtdCalcularDiasRestantesDeLosMeses(int dias){
+        int cantDias, mes;
+        for (mes = 1; mes <= 12; mes++) {
+            final boolean esFebrero = mes == 2;
+            final boolean tiene31 = mes <= 7 && mes % 2 == 1 || mes >= 8 && mes % 2 == 0;
+            if(esFebrero)
+                cantDias = 28;
+            else if(tiene31)
+                cantDias = 31;
+            else
+                cantDias = 30;
+            if(dias < cantDias)
+                break;
+            if (dias >= cantDias) 
+                  dias -= cantDias;
+            else
+                return dias + cantDias;
+            
+        }
+        return 0;
+    }
+
+    private int mtdCacularDiasDeLosMeses(int mesDeHoy) {
+        int dias = 0;
+        for (int mes = 1; mes <= mesDeHoy; mes++) {
+            final boolean esFebrero = mes == 2;
+            final boolean tiene31 = mes <= 7 && mes % 2 == 1 || mes >= 8 && mes % 2 == 0;
+            if(esFebrero)
+                dias += 28;
+            else if(tiene31)
+                dias += 31;
+            else
+                dias += 30;
+        }
+        return dias;
     }
 
     void mtdMenu(){
