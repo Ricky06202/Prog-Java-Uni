@@ -15,12 +15,10 @@ public class ClsCaracteristicaNumeros {
     }
 
     char calc_primo(int numero){
-        if(numero <= 1)
-            return 'X';
         for (int contador = 2; contador < numero; contador++)
             if(numero % contador == 0)
                 return 'X';
-        return 'P';
+        return numero > 1 ? 'P' : 'X';
     }
 
     char calc_perfecto(int numero){
