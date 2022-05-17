@@ -15,7 +15,7 @@ public class ClsCaracteristicaNumeros {
     }
 
     char calc_primo(int numero){
-        if(numero <= 0)
+        if(numero <= 1)
             return 'X';
         for (int contador = 2; contador < numero; contador++)
             if(numero % contador == 0)
