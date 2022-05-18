@@ -44,14 +44,10 @@ public class ClsCaracteristicaNumeros {
     }
 
     int calc_cifras(long numero){
-        return Long.toString(numero).length();
+        return Long.toString(Math.abs(numero)).length();
     }
 
     void calc_ulam(int numero){
-        if(numero <= 0){
-            JOptionPane.showMessageDialog(null, "ERROR: El numero debe ser positivo");
-            return;
-        }
         String conjeturaDeUlam = "";
         while(numero > 1){
             conjeturaDeUlam += numero + " ";
@@ -89,5 +85,27 @@ public class ClsCaracteristicaNumeros {
 
     char calc_capicua(int numero){
         return numero == calc_invertir(numero) ? 'C' : 'X';
+    }
+
+    int ingresar_numero(Object texto, String titulo){
+        while (true) {
+            try {
+                int numero = Integer.parseInt(JOptionPane.showInputDialog(null, texto, titulo, JOptionPane.INFORMATION_MESSAGE));
+                return numero;
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null,
+                "ERROR: Numero Invalido Ingresado","ERROR NUMERO INVALIDO",JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    int ingresar_numero_positivo(Object texto, String titulo){
+        while (true) {
+            int numero = ingresar_numero(texto,titulo);
+            if (numero > 0)
+                return numero;
+            JOptionPane.showMessageDialog(null,
+            "ERROR: El numero debe ser positivo","ERROR NUMERO INVALIDO",JOptionPane.ERROR_MESSAGE);
+        }
     }
 }
