@@ -31,8 +31,8 @@ public class ClsPrincipal {
                     "Calcular Capicua"}, // 
                 null);
 
-            int numero = opcion == 1 && opcion == 2 || opcion >= 5 && opcion <= 7 || opcion == 9 ? 
-            funcion.ingresar_numero_positivo("Ingrese un Numero", "LECTURA DE NUMERO") : 0;
+            int numero = opcion == 1 || opcion == 2 || opcion >= 5 && opcion <= 7 || opcion == 9 ? 
+            funcion.ingresar_numero_positivo("Ingrese un Numero", "LECTURA DE NUMERO",false) : 0;
 
             numero = opcion == 3 || opcion == 4 || opcion == 8 || opcion == 11 ? 
             funcion.ingresar_numero("Ingrese un Numero", "LECTURA DE NUMERO") : numero;
@@ -40,7 +40,7 @@ public class ClsPrincipal {
             switch (opcion) {
                 case 0:
                     int base = funcion.ingresar_numero("Ingrese la base", "LECTURA DE BASE");
-                    int exponente = funcion.ingresar_numero("Ingrese el exponente", "LECTURA DE EXPONENTE");
+                    int exponente = funcion.ingresar_numero_positivo("Ingrese el exponente", "LECTURA DE EXPONENTE",true);
                     JOptionPane.showMessageDialog(null, 
                     "El numero " + base + " elevado a la " + exponente +  " es igual a: " + funcion.enteroPotencia(base,exponente), 
                     "Calcular Potencia", JOptionPane.INFORMATION_MESSAGE);
@@ -89,8 +89,8 @@ public class ClsPrincipal {
                     "Calcular Factorial", JOptionPane.INFORMATION_MESSAGE);
                     break;
                 case 10:
-                    int numero1 = funcion.ingresar_numero_positivo("Ingrese el Primer Numero", "LECTURA DEL PRIMER NUMERO");
-                    int numero2 = funcion.ingresar_numero_positivo("Ingrese el Segundo Numero", "LECTURA DEL SEGUNDO NUMERO");
+                    int numero1 = funcion.ingresar_numero_positivo("Ingrese el Primer Numero", "LECTURA DEL PRIMER NUMERO",false);
+                    int numero2 = funcion.ingresar_numero_positivo("Ingrese el Segundo Numero", "LECTURA DEL SEGUNDO NUMERO",false);
                     JOptionPane.showMessageDialog(null, 
                     "Los numeros " + numero1 + " y " + numero2 + (funcion.calc_amigos(numero1,numero2) == 'X' ? " no" : "") + 
                     " son amigos", "Calcular Amigos", JOptionPane.INFORMATION_MESSAGE);

@@ -75,7 +75,7 @@ public class ClsCaracteristicaNumeros {
         return numero % 2 == 0 ? 'P' : 'I';
     }
 
-    int calc_factorial(int numero){
+    long calc_factorial(int numero){
         return numero <= 0 ? 1 : numero * calc_factorial(numero - 1);
     }
 
@@ -99,13 +99,14 @@ public class ClsCaracteristicaNumeros {
         }
     }
 
-    int ingresar_numero_positivo(Object texto, String titulo){
+    int ingresar_numero_positivo(Object texto, String titulo, boolean aceptarElCero){
         while (true) {
             int numero = ingresar_numero(texto,titulo);
-            if (numero > 0)
+            if (aceptarElCero ? numero >= 0 : numero > 0)
                 return numero;
             JOptionPane.showMessageDialog(null,
-            "ERROR: El numero debe ser positivo","ERROR NUMERO INVALIDO",JOptionPane.ERROR_MESSAGE);
+            "ERROR: El numero debe ser " + (aceptarElCero ? "Mayor o igual a 0" : "positivo"),
+            "ERROR NUMERO INVALIDO",JOptionPane.ERROR_MESSAGE);
         }
     }
 }
