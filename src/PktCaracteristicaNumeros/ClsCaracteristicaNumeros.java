@@ -21,14 +21,17 @@ public class ClsCaracteristicaNumeros {
         return numero > 1 ? 'P' : 'X';
     }
 
-    char calc_perfecto(int numero){
-        if(numero <= 0)
-            return 'X';
+    private int sumaDeDivisores(int numero, boolean incluyendoElNumero) {
         int suma = 0;
-        for (int contador = 1; contador < numero; contador++)
+        for (int contador = 1; incluyendoElNumero ? contador <= numero: contador < numero ; contador++)
             suma += numero % contador == 0 ? contador : 0;
-        return suma == numero ? 'P' : 'X';
+        return suma;
     }
+
+    char calc_perfecto(int numero){
+        return sumaDeDivisores(numero, false) == numero && numero > 0 ? 'P' : 'X';
+    }
+    
 
     long calc_invertir(long numero){
         int invertido = 0;
@@ -59,12 +62,7 @@ public class ClsCaracteristicaNumeros {
     }
 
     boolean calc_abundante(int numero){
-        if(numero <= 0)
-            return false;
-        int suma = 0;
-        for (int contador = 1; contador <= numero; contador++) 
-            suma += numero % contador == 0 ? contador : 0;
-        return suma > numero * 2;
+        return sumaDeDivisores(numero,true) > numero * 2 && numero > 0;
     }
 
     boolean calc_armstrong(int numero){
@@ -86,10 +84,7 @@ public class ClsCaracteristicaNumeros {
     }
 
     char calc_amigos(int numero1, int numero2){
-        int sumaDivisores1 = 0;
-        for (int contador = 1; contador < numero1; contador++) 
-            sumaDivisores1 += numero1 % contador == 0 ? contador : 0;
-        return numero2 == sumaDivisores1 ? 'A' : 'X';
+        return numero2 == sumaDeDivisores(numero1,false) ? 'A' : 'X';
     }
 
     char calc_capicua(int numero){

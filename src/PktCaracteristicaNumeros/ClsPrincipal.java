@@ -12,7 +12,7 @@ public class ClsPrincipal {
         while (true) { // (null, "Seleccione una de las opciones", "MENU", JOptionPane.);
             int opcion = JOptionPane.showOptionDialog(null, 
                 "Seleccione una de las opciones", 
-                "MENU", 
+                "MENU                                                                                                                                                                           (Para terminar el programa cierre este menu en la X de la esquina)", 
                 JOptionPane.NO_OPTION, 
                 JOptionPane.INFORMATION_MESSAGE, 
                 null, 
