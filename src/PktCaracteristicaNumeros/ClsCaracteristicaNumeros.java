@@ -55,7 +55,7 @@ public class ClsCaracteristicaNumeros {
             numero = numero % 2 == 0 ? numero / 2 : numero * 3 + 1; 
         }
         conjeturaDeUlam += numero;
-        JOptionPane.showMessageDialog(null,conjeturaDeUlam);
+        JOptionPane.showMessageDialog(null,conjeturaDeUlam,"Calcular Ulam",JOptionPane.INFORMATION_MESSAGE);
     }
 
     boolean calc_abundante(int numero){
