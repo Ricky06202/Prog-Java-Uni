@@ -85,14 +85,11 @@ public class ClsCaracteristicaNumeros {
         return numero <= 0 ? 1 : numero * calc_factorial(numero - 1);
     }
 
-    char calc_amigos(int numero){
+    char calc_amigos(int numero1, int numero2){
         int sumaDivisores1 = 0;
-        for (int contador = 1; contador < numero; contador++) 
-            sumaDivisores1 += numero % contador == 0 ? contador : 0;
-        int sumaDivisores2 = 0;
-        for (int contador = 1; contador < sumaDivisores1; contador++) 
-            sumaDivisores2 += numero % contador == 0 ? contador : 0;
-        return numero == sumaDivisores2 ? 'A' : 'X';
+        for (int contador = 1; contador < numero1; contador++) 
+            sumaDivisores1 += numero1 % contador == 0 ? contador : 0;
+        return numero2 == sumaDivisores1 ? 'A' : 'X';
     }
 
     char calc_capicua(int numero){
