@@ -49,9 +49,11 @@ public class ClsCaracteristicaNumeros {
 
     void calc_ulam(int numero){
         String conjeturaDeUlam = "";
+        int contador = 0;
         while(numero > 1){
             conjeturaDeUlam += numero + " ";
-            numero = numero % 2 == 0 ? numero / 2 : numero * 3 + 1; 
+            numero = numero % 2 == 0 ? numero / 2 : numero * 3 + 1;
+            conjeturaDeUlam += ++contador % 20 == 0 ? "\n" : "";
         }
         conjeturaDeUlam += numero;
         JOptionPane.showMessageDialog(null,conjeturaDeUlam,"Calcular Ulam",JOptionPane.INFORMATION_MESSAGE);
