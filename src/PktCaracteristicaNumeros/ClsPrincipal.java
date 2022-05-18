@@ -20,15 +20,15 @@ public class ClsPrincipal {
                     "Calcular Potencia",
                     "Calcular Primo",
                     "Calcular Perfecto",
-                    "Calcular Invertido",//
-                    "Calcular Cifras", //
+                    "Calcular Invertido",
+                    "Calcular Cifras", 
                     "Calcular Ulam",
                     "Calcular Abundante",
                     "Calcular Armstrong",
-                    "Calcular Par o Impar", //
+                    "Calcular Par o Impar", 
                     "Calcular Factorial",
                     "Calcular Amigos",
-                    "Calcular Capicua"}, // 
+                    "Calcular Capicua"},  
                 null);
 
             int numero = opcion == 1 || opcion == 2 || opcion >= 5 && opcion <= 7 || opcion == 9 ? 
