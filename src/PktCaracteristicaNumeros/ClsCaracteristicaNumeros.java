@@ -82,12 +82,7 @@ public class ClsCaracteristicaNumeros {
     }
 
     int calc_factorial(int numero){
-        if(numero < 0)
-            return 0;
-        int factorial = 0;
-        for (int contador = 1; contador < numero; contador++)
-            factorial += numero % contador == 0 ? contador : 0;
-        return factorial;
+        return numero <= 0 ? 1 : numero * calc_factorial(numero - 1);
     }
 
     char calc_amigos(int numero){
