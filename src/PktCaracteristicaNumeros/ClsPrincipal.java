@@ -45,14 +45,10 @@ public class ClsPrincipal {
             opcion == 10 ? "Calcular Amigos" :
             "Calcular Capicua"; //opcion 11
 
-            int numero = opcion == 1 || opcion == 2 || opcion >= 5 && opcion <= 7 ? 
-            funcion.ingresar_numero_positivo(titulo) : 0;
-
-            numero = opcion == 9 ? 
-            funcion.ingresar_numero_positivo_incluyendo_0(titulo) : numero;
-
-            numero = opcion == 3 || opcion == 4 || opcion == 8 || opcion == 11 ? 
-            funcion.ingresar_numero(titulo) : numero;
+            int numero = 
+            opcion == 1 || opcion == 2 || opcion >= 5 && opcion <= 7 ? funcion.ingresar_numero_positivo(titulo) : 
+            opcion == 9 ? funcion.ingresar_numero_positivo_incluyendo_0(titulo) :
+            opcion == 3 || opcion == 4 || opcion == 8 || opcion == 11 ? funcion.ingresar_numero(titulo) : 0;
 
             switch (opcion) {
                 case 0: //Calcular Potencia
