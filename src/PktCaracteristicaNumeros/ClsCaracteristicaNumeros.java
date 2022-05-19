@@ -101,14 +101,37 @@ public class ClsCaracteristicaNumeros {
         }
     }
 
+    int ingresar_numero(String titulo){
+        return ingresar_numero("Ingrese un Numero",titulo);
+    }
+
     int ingresar_numero_positivo(Object texto, String titulo){
         while (true) {
             int numero = ingresar_numero(texto,titulo);
             if (numero > 0)
-                return numero;
+            return numero;
             JOptionPane.showMessageDialog(null,
             "ERROR: El numero debe ser positivo",
             "ERROR NUMERO INVALIDO",JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    int ingresar_numero_positivo(String titulo){
+        return ingresar_numero_positivo("Ingrese un Numero", titulo);
+    }
+
+    int ingresar_numero_positivo_incluyendo_0(Object texto, String titulo){
+        while (true) {
+            int numero = ingresar_numero(texto,titulo);
+            if (numero >= 0)
+                return numero;
+            JOptionPane.showMessageDialog(null,
+            "ERROR: El numero debe ser mayor o igual a 0",
+            "ERROR NUMERO INVALIDO",JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    int ingresar_numero_positivo_incluyendo_0(String titulo){
+        return ingresar_numero_positivo_incluyendo_0("Ingrese un Numero", titulo);
     }
 }
