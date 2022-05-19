@@ -101,13 +101,13 @@ public class ClsCaracteristicaNumeros {
         }
     }
 
-    int ingresar_numero_positivo(Object texto, String titulo, boolean aceptarElCero){
+    int ingresar_numero_positivo(Object texto, String titulo){
         while (true) {
             int numero = ingresar_numero(texto,titulo);
-            if (aceptarElCero ? numero >= 0 : numero > 0)
+            if (numero > 0)
                 return numero;
             JOptionPane.showMessageDialog(null,
-            "ERROR: El numero debe ser " + (aceptarElCero ? "Mayor o igual a 0" : "positivo"),
+            "ERROR: El numero debe ser positivo",
             "ERROR NUMERO INVALIDO",JOptionPane.ERROR_MESSAGE);
         }
     }
