@@ -109,8 +109,7 @@ public class ClsPrincipal {
                     int numero1 = funcion.ingresar_numero_positivo("Ingrese el Primer Numero", titulo);
                     int numero2 = funcion.ingresar_numero_positivo("Ingrese el Segundo Numero", titulo);
                     JOptionPane.showMessageDialog(null, 
-                    "Los numeros " + numero1 + " y " + numero2 + 
-                    (funcion.calc_amigos(numero1,numero2) == 'X' ? " no" : "") + " son amigos", 
+                    "Los numeros " + numero1 + " y " + numero2 + (funcion.calc_amigos(numero1,numero2) == 'X' ? " no" : "") + " son amigos", 
                     titulo, JOptionPane.INFORMATION_MESSAGE);
                     break;
                 case 11://Calcular Capicua
