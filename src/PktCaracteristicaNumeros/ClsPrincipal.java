@@ -97,9 +97,15 @@ public class ClsPrincipal {
                     titulo, JOptionPane.INFORMATION_MESSAGE);
                     break;
                 case 9://Calcular Factorial
-                    JOptionPane.showMessageDialog(null, 
-                    "El Factorial del numero " + numero + " es: " + funcion.calc_factorial(numero), 
-                    titulo, JOptionPane.INFORMATION_MESSAGE);
+                    long factorial = funcion.calc_factorial(numero);
+                    if (factorial > 0)
+                        JOptionPane.showMessageDialog(null, 
+                        "El Factorial del numero " + numero + " es: " + factorial, 
+                        titulo, JOptionPane.INFORMATION_MESSAGE);
+                    else 
+                        JOptionPane.showMessageDialog(null, 
+                        "ERROR NUMERO DEMASIADO GRANDE", 
+                        titulo, JOptionPane.ERROR_MESSAGE);
                     break;
                 case 10://Calcular Amigos
                     int numero1 = funcion.ingresar_numero_positivo("Ingrese el Primer Numero", titulo);
