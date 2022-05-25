@@ -59,9 +59,15 @@ public class ClsPrincipal {
                 case 0: //Calcular Potencia
                     int base = funcion.ingresar_numero("Ingrese la base", titulo);
                     int exponente = funcion.ingresar_numero_positivo("Ingrese el exponente", titulo);
-                    JOptionPane.showMessageDialog(null, 
-                    "El numero " + base + " elevado a la " + exponente +  " es igual a: " + funcion.enteroPotencia(base,exponente), 
-                    titulo, JOptionPane.INFORMATION_MESSAGE);
+                    int potencia = funcion.enteroPotencia(base,exponente);
+                    if(potencia > 0)
+                        JOptionPane.showMessageDialog(null, 
+                        "El numero " + base + " elevado a la " + exponente +  " es igual a: " + potencia, 
+                        titulo, JOptionPane.INFORMATION_MESSAGE);
+                    else
+                        JOptionPane.showMessageDialog(null, 
+                        "ERROR NUMERO DEMASIADO GRANDE", 
+                        titulo, JOptionPane.ERROR_MESSAGE);
                     break;
                 case 1://Calcular Primo
                     JOptionPane.showMessageDialog(null, 
