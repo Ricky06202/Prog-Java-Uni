@@ -2,9 +2,14 @@ package PktCaracteristicaNumeros;
 
 import javax.swing.JOptionPane;
 
-/**
- * ClsPrincipal
- */
+
+//
+// ──────────────────────────────────────────────────────────────── I ──────────
+//   :::::: C L S P R I N C I P A L : :  :   :    :     :        :          :
+// ──────────────────────────────────────────────────────────────────────────
+//
+
+
 public class ClsPrincipal {
 
     public static void main(String[] args) {
@@ -21,11 +26,11 @@ public class ClsPrincipal {
                 "Calcular Primo",//1
                 "Calcular Perfecto",//2
                 "Calcular Invertido",//3
-                "Calcular Cifras", //4
+                "Calcular Cifras",//4
                 "Calcular Ulam",//5
                 "Calcular Abundante",//6
                 "Calcular Armstrong",//7
-                "Calcular Par o Impar", //8
+                "Calcular Par o Impar",//8
                 "Calcular Factorial",//9
                 "Calcular Amigos",//10
                 "Calcular Capicua"},//11  

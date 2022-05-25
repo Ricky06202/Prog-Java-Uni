@@ -2,9 +2,13 @@ package PktCaracteristicaNumeros;
 
 import javax.swing.JOptionPane;
 
-/**
- * ClsCaracteristicaNumeros
- */
+//
+// ──────────────────────────────────────────────────────────────────────────────────────── II ──────────
+//   :::::: C L S C A R A C T E R I S T I C A N U M E R O S : :  :   :    :     :        :          :
+// ──────────────────────────────────────────────────────────────────────────────────────────────────
+//
+
+
 public class ClsCaracteristicaNumeros {
 
     int enteroPotencia(int base, int exponente){
