@@ -11,14 +11,14 @@ import javax.swing.JOptionPane;
 
 public class ClsCaracteristicaNumeros {
 
-    int enteroPotencia(int base, int exponente){
+    public int enteroPotencia(int base, int exponente){
         int potencia = 1;
         for (int contador = 0; contador < exponente; contador++)
             potencia *= base;
         return potencia;
     }
 
-    char calc_primo(int numero){
+    public char calc_primo(int numero){
         for (int contador = 2; contador < numero; contador++)
             if(numero % contador == 0)
                 return 'X';
@@ -32,12 +32,12 @@ public class ClsCaracteristicaNumeros {
         return suma;
     }
 
-    char calc_perfecto(int numero){
+    public char calc_perfecto(int numero){
         return sumaDeDivisores(numero, false) == numero && numero > 0 ? 'P' : 'X';
     }
     
 
-    long calc_invertir(long numero){
+    public long calc_invertir(long numero){
         int invertido = 0;
         while (numero != 0) {
             invertido *= 10;
@@ -47,11 +47,11 @@ public class ClsCaracteristicaNumeros {
         return invertido;
     }
 
-    int calc_cifras(long numero){
+    public int calc_cifras(long numero){
         return Long.toString(Math.abs(numero)).length();
     }
 
-    void calc_ulam(int numero){
+    public void calc_ulam(int numero){
         String conjeturaDeUlam = "";
         int contador = 0;
         while(numero > 1){
@@ -63,11 +63,11 @@ public class ClsCaracteristicaNumeros {
         JOptionPane.showMessageDialog(null,conjeturaDeUlam,"Calcular Ulam",JOptionPane.INFORMATION_MESSAGE);
     }
 
-    boolean calc_abundante(int numero){
+    public boolean calc_abundante(int numero){
         return sumaDeDivisores(numero,true) > numero * 2 && numero > 0;
     }
 
-    boolean calc_armstrong(int numero){
+    public boolean calc_armstrong(int numero){
         String numeroEnCadena = Integer.toString(numero);
         int suma = 0;
         for (int posicion = 0; posicion < calc_cifras(numero); posicion++) {
@@ -77,23 +77,23 @@ public class ClsCaracteristicaNumeros {
         return suma == numero;
     }
 
-    char calc_parImpar(int numero){
+    public char calc_parImpar(int numero){
         return numero % 2 == 0 ? 'P' : 'I';
     }
 
-    long calc_factorial(int numero){
+    public long calc_factorial(int numero){
         return numero <= 0 ? 1 : numero * calc_factorial(numero - 1);
     }
 
-    char calc_amigos(int numero1, int numero2){
+    public char calc_amigos(int numero1, int numero2){
         return numero2 == sumaDeDivisores(numero1,false) ? 'A' : 'X';
     }
 
-    char calc_capicua(int numero){
+    public char calc_capicua(int numero){
         return numero == calc_invertir(numero) ? 'C' : 'X';
     }
 
-    int ingresar_numero(Object texto, String titulo){
+    public int ingresar_numero(Object texto, String titulo){
         while (true) {
             try {
                 int numero = Integer.parseInt(JOptionPane.showInputDialog(null, texto, titulo, JOptionPane.INFORMATION_MESSAGE));
@@ -105,11 +105,11 @@ public class ClsCaracteristicaNumeros {
         }
     }
 
-    int ingresar_numero(String titulo){
+    public int ingresar_numero(String titulo){
         return ingresar_numero("Ingrese un Numero",titulo);
     }
 
-    int ingresar_numero_positivo(Object texto, String titulo){
+    public int ingresar_numero_positivo(Object texto, String titulo){
         while (true) {
             int numero = ingresar_numero(texto,titulo);
             if (numero > 0)
@@ -120,11 +120,11 @@ public class ClsCaracteristicaNumeros {
         }
     }
 
-    int ingresar_numero_positivo(String titulo){
+    public int ingresar_numero_positivo(String titulo){
         return ingresar_numero_positivo("Ingrese un Numero", titulo);
     }
 
-    int ingresar_numero_positivo_incluyendo_0(Object texto, String titulo){
+    public int ingresar_numero_positivo_incluyendo_0(Object texto, String titulo){
         while (true) {
             int numero = ingresar_numero(texto,titulo);
             if (numero >= 0)
@@ -135,7 +135,7 @@ public class ClsCaracteristicaNumeros {
         }
     }
 
-    int ingresar_numero_positivo_incluyendo_0(String titulo){
+    public int ingresar_numero_positivo_incluyendo_0(String titulo){
         return ingresar_numero_positivo_incluyendo_0("Ingrese un Numero", titulo);
     }
 }
