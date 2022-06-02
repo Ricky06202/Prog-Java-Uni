@@ -1,10 +1,16 @@
 package Proyecto2_Parcial2;
+
+import java.util.Random;
+
+import javax.swing.JOptionPane;
+
+import PktCaracteristicaNumeros.ClsCaracteristicaNumeros;
+
 //
 // ────────────────────────────────────────────────────────── I ──────────
 //   :::::: P R I N C I P A L : :  :   :    :     :        :          :
 // ────────────────────────────────────────────────────────────────────
 //
-
 /*
 La empresa paga a 50 empleados el salario normal
 *Salario Normal = horas trabajadas * pago por hora
@@ -27,22 +33,33 @@ Nombre Salario normal, bono, salario total, salario real
 despues de la impresion, se deben imprimir los totales de bono, salario total y salario real
  */
 public class Principal {
-    private ClsCaracteristicaNumeros funciones = new ClsCaracteristicaNumeros();
+    
+    ClsCaracteristicaNumeros proyecto1 = new ClsCaracteristicaNumeros();
     public static void main(String[] args) {
+        Principal principal = new Principal();
 
+        
     }
 
-    private void mostrarMensaje(Object mensaje){
-        System.out.println(mensaje);
+    void mostrarMensaje(Object mensaje, String titulo){
+        JOptionPane.showMessageDialog(null, mensaje, titulo, JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    void mostrarMensajeError(Object mensaje, String titulo){
+        JOptionPane.showMessageDialog(null, mensaje, titulo, JOptionPane.ERROR_MESSAGE);
     }
 
-    private float leer(){
+    float leer(Object texto, String titulo){
         while (true) {
-            float valor = Float.parseFloat(System.console().readLine());
+            float valor = Float.parseFloat(JOptionPane.showInputDialog(null, texto, titulo, JOptionPane.INFORMATION_MESSAGE));
             if(valor > 0)
                 return valor;
             System.out.println("DEBE SER UN VALOR POSITIVO");
         }
+    }
+
+    int enteroAleatorio(){
+        return new Random().nextInt(250, 8500 + 1); // se le suma 1 al limite superio para incluirlo
     }
 
 }
