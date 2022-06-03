@@ -3,7 +3,6 @@ package Proyecto2_Parcial2;
 import java.util.Random;
 
 import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 
 import PktCaracteristicaNumeros.ClsCaracteristicaNumeros;
 
@@ -38,35 +37,52 @@ public class Principal {
     public static void main(String[] args) {
         ClsCaracteristicaNumeros proyecto1 = new ClsCaracteristicaNumeros();
         Principal principal = new Principal();
-        final int cantidadDeEmpleados = 10;//50;
-        String listaEmpleados = "Num | Nombres de los Empleados | Salario Normal | Bonificacion | Salario Total | Salario Real\n";
+        final int cantidadDeEmpleados = 2;//50;
         float sumaBono = 0, sumaSalarioTotal = 0, sumaSalarioReal = 0;
         for (int empleado = 1; empleado <= cantidadDeEmpleados; empleado++) {
-            String IdentificadorEmpleado = "EMPLEADO #" + empleado;
+            String identificadorEmpleado = "EMPLEADO #" + empleado;
             //lectura de los datos
-            String nombre = principal.ingresarTexto("Ingrese el nombre del empleado", IdentificadorEmpleado);
-            float horasTrabajadas = principal.ingresarPositivo("Ingrese la cantidad de horas trabajadas", IdentificadorEmpleado);
-            float pagoPorHora = principal.ingresarPositivo("Ingrese el Pago por Hora", IdentificadorEmpleado);
-            int diaDeCumpleaños = (int)principal.ingresarPositivo("Ingrese el dia de cumpleaños", IdentificadorEmpleado);
-            int mesDeCumpleaños = (int)principal.ingresarPositivo("Ingrese el mes de cumpleaños", IdentificadorEmpleado);
+            String nombre = principal.ingresarTexto("Ingrese el nombre del empleado", identificadorEmpleado);
+            float horasTrabajadas = principal.ingresarPositivo("Ingrese la cantidad de horas trabajadas", identificadorEmpleado);
+            float pagoPorHora = principal.ingresarPositivo("Ingrese el Pago por Hora", identificadorEmpleado);
+            int mesDeCumpleaños = principal.ingresarMes("Ingrese el mes de cumpleaños", identificadorEmpleado);
+            int diaDeCumpleaños = principal.ingresarDia("Ingrese el dia de cumpleaños", identificadorEmpleado, mesDeCumpleaños);
             
             float salarioNormal = horasTrabajadas * pagoPorHora;
 
             //!BONIFICACIONES
+            String listaBonificaciones = "====INFORME DE BONIFICACIONES====";
             float bono = 50; // empieza en 50 por que es diciembre
-            bono += proyecto1.calc_perfecto(principal.sumaDeDigitos(diaDeCumpleaños)) == 'P' ? 50 : 0;
-            bono += proyecto1.calc_primo(mesDeCumpleaños) == 'P' ? 30 : 0;
+            listaBonificaciones += "\nBonificacion por ser diciembre: 50.00";
+            if(proyecto1.calc_perfecto(principal.sumaDeDigitos(diaDeCumpleaños)) == 'P'){
+                listaBonificaciones += "\nBonificacion por su dia de cumpleaños: 50.00";
+                bono += 50;
+            }
+            if(proyecto1.calc_primo(mesDeCumpleaños) == 'P'){
+                listaBonificaciones += "\nBonificacion por su mes de cumpleaños: 30.00";
+                bono += 30;
+            }
             int aleatorio1 = principal.enteroAleatorio();
             int aleatorio2 = principal.enteroAleatorio();
-            bono += proyecto1.calc_amigos(aleatorio1,aleatorio2) == 'A' ? 100 : 0;
-            bono += proyecto1.calc_armstrong(aleatorio1) || proyecto1.calc_armstrong(aleatorio2) ? 150 : 0;
+            if(proyecto1.calc_amigos(aleatorio1,aleatorio2) == 'A'){
+                listaBonificaciones += String.format("\nBonificacion por que los numeros aleatorios %d y %d son amigos: 100.00", aleatorio1,aleatorio2);
+                bono += 100;
+            }
+            if(proyecto1.calc_armstrong(aleatorio1) || proyecto1.calc_armstrong(aleatorio2)){
+                listaBonificaciones += String.format("\nBonificacion por que el numero aleatorio %d es armstrong: 150.00",proyecto1.calc_armstrong(aleatorio1) ? aleatorio1 : aleatorio2);
+                bono += 150;
+            }
 
             float salarioTotal = salarioNormal + bono;
 
             float salarioReal = proyecto1.calc_invertir((int)salarioTotal);
             salarioReal = salarioTotal > salarioReal ? salarioTotal : salarioReal;
 
-            listaEmpleados += String.format("%3d     %-24s   %14.2f   %14.2f   %14.2f   %14.2f\n",empleado, nombre,salarioNormal,bono,salarioTotal,salarioReal);
+            String listaEmpleado = String.format("Nombre: %s\nSalario Normal: %.2f\nBonificacion: %.2f\nSalario Total: %.2f\nSalario Real: %.2f", nombre,salarioNormal,bono,salarioTotal,salarioReal);
+            
+            String mensajeAMostrar = listaBonificaciones + "\n====INFORME GENERAL====\n" + listaEmpleado;
+
+            principal.mostrarMensaje(mensajeAMostrar, "REGISTRO DEL " + identificadorEmpleado);
 
             //!Sumatoria
             sumaBono += bono;
@@ -75,12 +91,37 @@ public class Principal {
 
         }
 
-        principal.mostrarMensajeLargo(listaEmpleados, "REGISTRO DE LOS " + cantidadDeEmpleados + " EMPLEADOS");
 
         String listaSumatorias = String.format(
             "Total de Bonificaciones:   %12.2f\nTotal de Salarios Totales: %12.2f\nTotal de Salarios Reales:  %12.2f",sumaBono,sumaSalarioTotal,sumaSalarioReal);
 
         principal.mostrarMensaje(listaSumatorias, "REGISTRO DE LAS SUMATORIAS");
+    }
+
+    int ingresarDia(Object mensaje, String titulo, int mes){
+        boolean tiene31 = mes <= 7 && mes % 2 == 1 || mes >= 8 && mes % 2 == 0;
+        int maximoDeDias;
+        if(mes == 2)
+            maximoDeDias = 29;
+        else if(tiene31)
+            maximoDeDias = 31;
+        else
+            maximoDeDias = 30;
+        while (true) {
+            int dia = (int)ingresarPositivo(mensaje, titulo);
+            if(dia <= maximoDeDias)
+                return dia;
+            mostrarMensajeError("DIA INCORRECTO, DEBE SER UN NUMERO MENOR O IGUAL A " + maximoDeDias);
+        }
+    }
+
+    int ingresarMes(Object mensaje, String titulo){
+        while (true) {
+            int mes = (int)ingresarPositivo(mensaje, titulo);
+            if(mes <= 12)
+                return mes;
+            mostrarMensajeError("MES INCORRECTO, DEBE SER UN NUMERO MENOR O IGUAL A 12");
+        }
     }
 
     int sumaDeDigitos(int numero){
@@ -95,15 +136,13 @@ public class Principal {
     void mostrarMensaje(Object mensaje, String titulo){
         JOptionPane.showMessageDialog(null, mensaje, titulo, JOptionPane.INFORMATION_MESSAGE);
     }
-
-    void mostrarMensajeLargo(String mensaje, String titulo){
-        JTextArea mensajeLargo = new JTextArea();
-        mensajeLargo.setText(mensaje);
-        mostrarMensaje(mensajeLargo, titulo);
-    }
     
     void mostrarMensajeError(Object mensaje, String titulo){
         JOptionPane.showMessageDialog(null, mensaje, titulo, JOptionPane.ERROR_MESSAGE);
+    }
+
+    void mostrarMensajeError(Object mensaje){
+        mostrarMensajeError(mensaje,"ERROR NUMERO INVALIDO");
     }
 
     String ingresarTexto(Object mensaje, String titulo){
@@ -122,7 +161,7 @@ public class Principal {
             try {
                 return Float.parseFloat(JOptionPane.showInputDialog(null, mensaje, titulo, JOptionPane.INFORMATION_MESSAGE));
             } catch (Exception e) {
-                mostrarMensajeError("EL NUMERO INGRESADO ES INCORRECTO","ERROR NUMERO INVALIDO");
+                mostrarMensajeError("EL NUMERO INGRESADO ES INCORRECTO");
             }
         }
     }
@@ -132,7 +171,7 @@ public class Principal {
             float valor = ingresarNumero(mensaje, titulo);
             if(valor > 0)
                 return valor;
-            mostrarMensajeError("DEBE SER UN VALOR POSITIVO","ERROR NUMERO INVALIDO");
+            mostrarMensajeError("DEBE SER UN VALOR POSITIVO");
         }
     }
 
