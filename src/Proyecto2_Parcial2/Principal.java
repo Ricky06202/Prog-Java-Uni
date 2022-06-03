@@ -3,6 +3,7 @@ package Proyecto2_Parcial2;
 import java.util.Random;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 
 import PktCaracteristicaNumeros.ClsCaracteristicaNumeros;
 
@@ -37,8 +38,8 @@ public class Principal {
     public static void main(String[] args) {
         ClsCaracteristicaNumeros proyecto1 = new ClsCaracteristicaNumeros();
         Principal principal = new Principal();
-        final int cantidadDeEmpleados = 50;
-        String listaEmpleados = "";
+        final int cantidadDeEmpleados = 10;//50;
+        String listaEmpleados = "Num | Nombres de los Empleados | Salario Normal | Bonificacion | Salario Total | Salario Real\n";
         float sumaBono = 0, sumaSalarioTotal = 0, sumaSalarioReal = 0;
         for (int empleado = 1; empleado <= cantidadDeEmpleados; empleado++) {
             String IdentificadorEmpleado = "EMPLEADO #" + empleado;
@@ -65,12 +66,21 @@ public class Principal {
             float salarioReal = proyecto1.calc_invertir((int)salarioTotal);
             salarioReal = salarioTotal > salarioReal ? salarioTotal : salarioReal;
 
-            listaEmpleados += String.format("%-20s %12.2f %12.2f %12.2f %12.2f\n", nombre,salarioNormal,bono,salarioTotal,salarioReal);
+            listaEmpleados += String.format("%3d     %-24s   %14.2f   %14.2f   %14.2f   %14.2f\n",empleado, nombre,salarioNormal,bono,salarioTotal,salarioReal);
 
-            //todo
-            if(empleado == 3)
-                break;
+            //!Sumatoria
+            sumaBono += bono;
+            sumaSalarioTotal += salarioTotal;
+            sumaSalarioReal += salarioReal;
+
         }
+
+        principal.mostrarMensajeLargo(listaEmpleados, "REGISTRO DE LOS " + cantidadDeEmpleados + " EMPLEADOS");
+
+        String listaSumatorias = String.format(
+            "Total de Bonificaciones:   %12.2f\nTotal de Salarios Totales: %12.2f\nTotal de Salarios Reales:  %12.2f",sumaBono,sumaSalarioTotal,sumaSalarioReal);
+
+        principal.mostrarMensaje(listaSumatorias, "REGISTRO DE LAS SUMATORIAS");
     }
 
     int sumaDeDigitos(int numero){
@@ -84,6 +94,12 @@ public class Principal {
 
     void mostrarMensaje(Object mensaje, String titulo){
         JOptionPane.showMessageDialog(null, mensaje, titulo, JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    void mostrarMensajeLargo(String mensaje, String titulo){
+        JTextArea mensajeLargo = new JTextArea();
+        mensajeLargo.setText(mensaje);
+        mostrarMensaje(mensajeLargo, titulo);
     }
     
     void mostrarMensajeError(Object mensaje, String titulo){
