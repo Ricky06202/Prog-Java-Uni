@@ -3,55 +3,81 @@ package Practica2;
 public class Practica2 {
     public static void main(String[] args) {
         var funciones = new Practica2();
-        int[][] MAT = new int[4][4];
+        Integer[][] MAT = new Integer[4][4];
         //bucle 16 veces, leer cada vez la direccion y el valor
         // y mostrarlo cada vez para saber como va la matriz
-        funciones.mostrarMatrizIntuitiva(MAT);
+        funciones.leerDireccionYValor(MAT);
+    }
+
+    public void leerDireccionYValor(Integer[][] MAT) {
+        for (int numero = 0; numero < MAT.length * MAT.length; numero++) {
+            mostrarMatrizIntuitiva(MAT);  
+            System.out.println("Ingrese La Direccion en la que se añadira el valor");
+            Coordenada direccion = ingresarCoordenada();
+            if(!esValido(MAT, direccion)){
+                System.out.println("LA DIRECCION PROPORCIONADA NO ES VALIDA POR QUE ESTA OCUPADA");
+                numero--;
+                continue;
+            }
+            int valor = ingresarNumero("Ingrese el Valor: ");
+            añadirValor(MAT, direccion, valor);
+        }
+        mostrarMatrizIntuitiva(MAT);
+    }
+
+    void añadirValor(Integer[][] MAT, Coordenada direccion, int valor){
+        MAT[direccion.getFila()][direccion.getColumna()] = valor;
+    }
+
+    boolean esValido(Integer[][] MAT, Coordenada direccion) {
+        return MAT[direccion.getFila()][direccion.getColumna()] == null;
     }
 
     Coordenada ingresarCoordenada(){
-        int fila = ingresarPositivoMenorA(4);
-        int columna = ingresarPositivoMenorA(4);
-        return new Coordenada(fila, columna);
+        int fila = ingresarPositivoMenorA("Ingrese la fila deseada: ",4);
+        int columna = ingresarPositivoMenorA("Ingrese la columna deseada: ",4);
+        return new Coordenada(fila-1, columna-1);
     }
 
-    int ingresarPositivoMenorA(int limite){
+    int ingresarPositivoMenorA(String texto, int limite){
         while(true){
-            int num = ingresarPositivo();
+            int num = ingresarPositivo(texto);
             if(num <= limite)
                 return num;
-            System.out.println("ERROR EL NUMERO DEBE SER MENOR IGUAL A" + limite);
+            System.out.println("\nERROR EL NUMERO DEBE SER MENOR IGUAL A " + limite);
         }
     }
 
-    int ingresarPositivo(){
+    int ingresarPositivo(String texto){
         while(true){
-            int num = ingresarNumero();
+            int num = ingresarNumero(texto);
             if(num > 0)
                 return num;
-            System.out.println("ERROR EL NUMERO DEBE SER POSITIVO");
+            System.out.println("\nERROR EL NUMERO DEBE SER POSITIVO");
         }
     }
 
-    int ingresarNumero(){
+    int ingresarNumero(String texto){
         while (true) {
             try {
+                System.out.print(texto);
                 int num = Integer.parseInt(System.console().readLine());
                 return num;
             } catch (Exception e) {
-                System.out.println("ERROR NUMERO INCORRECTO");
+                System.out.println("\nERROR NUMERO INCORRECTO");
             }
         }
     }
     
-    void mostrarMatrizIntuitiva(int[][] MAT){
+    void mostrarMatrizIntuitiva(Integer[][] MAT){
         int numeroFila = 1;
-        System.out.println("    1    2    3    4 ");
-        System.out.println("##____#____#____#____##");
-        for (int[] fila : MAT) {
+        System.out.println(" #####################");
+        System.out.println(" #  1 #  2 #  3 #  4 #");
+        System.out.println(" #____#____#____#____#");
+        for (Integer[] fila : MAT) {
             System.out.print(numeroFila++ + "|");
-            for (int numero : fila) {
-                System.out.print(String.format(" %3d ",numero));
+            for (Integer numero : fila) {
+                System.out.print(String.format("%4d ",numero));
             }
             System.out.println();
         }
