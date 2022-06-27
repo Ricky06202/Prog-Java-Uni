@@ -2,12 +2,13 @@ package MiPaqueteRicardoSanjur.CuadradoMagico;
 
 public class Cuadrado{
     private int[][] cuadrado;
-    private int tamaño;
+    private int tamaño, numeroMagico;
     private String textoCuadrado, textoSumaFila, textoSumaColumna, textoSumaDiagonal;
     
     public Cuadrado(int tamaño){
         this.tamaño = tamaño;
         cuadrado = new int[tamaño][tamaño];
+        numeroMagico = tamaño * ((int)Math.pow(tamaño, 2) + 1) / 2;
         llenarCuadrado();
         textoCuadrado = calcularCuadrado();
         textoSumaFila = calcularSumaFila();
@@ -17,7 +18,11 @@ public class Cuadrado{
 
     @Override
     public String toString() {
-        return textoCuadrado + textoSumaFila + textoSumaColumna + textoSumaDiagonal;
+        return textoCuadrado + "\nEl numero magico es de: " + numeroMagico;
+    }
+
+    public String sumatoriasString(){
+        return textoSumaFila + textoSumaColumna + textoSumaDiagonal;
     }
 
     public void llenarCuadrado(){
@@ -88,5 +93,11 @@ public class Cuadrado{
         return sumaDiagonal;
     }
 
+	/**
+	 * @return el tamaño de la matriz
+	 */
+	public int getTamaño() {
+		return tamaño;
+	}
 
 }
