@@ -22,7 +22,52 @@ public class JuegosRicardoSanjur {
                 funciones.mtdMostrarMensaje(cuadrado.sumatoriasString(), "VERIFICACION DE SUMATORIAS"); 
                 break;
             case 1:
-                var vida = new Vida(20, 0, Forma.X);
+                int tamaño = funciones.mtdIngresarMayorA5("Ingrese el tamaño de la matriz del universo", "TAMAÑO UNIVERSO");
+                Forma forma = funciones.mtdElegirForma("Seleccione La figura inicial", "FIGURA INICIAL");
+                var vida = new Vida(tamaño, forma);
+                int cantidadGeneraciones = funciones.mtdIngresarPositivo("Ingrese la cantidad de Generaciones\n(Por Cada Generacion Se Mostraran 2 Universos)", "CANTIDAD DE GENERACIONES");
+                for (int generaciones = 0; generaciones < cantidadGeneraciones; generaciones++) {
+                    System.out.println(vida);
+                    var generacion = new Generacion(vida.getUniverso());
+                    if(!generacion.sigueAlguienVivo())
+                        break;
+                    String generacionActual = generacion.toString();
+                    boolean repeticionInstantanea, repeticionTardia, muerteTemprana, muerteTardia;
+
+                    muerteTemprana = !generacion.sigueAlguienVivo();
+                    repeticionInstantanea = vida.hayVidaInfinita(generacionActual, generacion.siguiente());
+                    repeticionTardia = vida.hayVidaInfinita(generacionActual, generacion.siguiente());
+                    muerteTardia = !generacion.sigueAlguienVivo();
+
+                    if (repeticionInstantanea || repeticionTardia || muerteTemprana || muerteTardia){
+                        if(muerteTemprana){
+                            funciones.mtdMostrarMensaje(
+                                "Esta civilizacion cayo ante su muerte" +
+                                "\nDetendremos la simulacion para dejarla descansar en paz", 
+                                "MUERTE DE LA CIVILIZACION");
+                            break;
+                        }
+                        vida.siguiente();
+                        System.out.println(vida);
+                        if(muerteTardia)
+                            funciones.mtdMostrarMensaje(
+                                "Esta civilizacion cayo ante su muerte" +
+                                "\nDetendremos la simulacion para dejarla descansar en paz", 
+                                "MUERTE DE LA CIVILIZACION");
+                        else if(repeticionInstantanea)
+                            funciones.mtdMostrarMensaje(
+                                "Esta civilizacion posee una vida infinita y en paz" +
+                                "\nDetendremos la simulacion para dejarlos vivir su inmortalidad", 
+                                "CIVILIZACION INMORTAL DE PAZ");
+                        else if(repeticionTardia)
+                            funciones.mtdMostrarMensaje(
+                                "Esta civilizacion posee una vida infinita y alegre" +
+                                "\nDetendremos la simulacion para que vivan alegremente su inmortalidad", 
+                                "CIVILIZACION ALEGRE INMORTAL");
+                        break;
+                    }
+                    vida.siguiente();
+                }
                 break;
             default:
                 System.exit(0);
@@ -52,6 +97,15 @@ public class JuegosRicardoSanjur {
         }
     }
     
+    int mtdIngresarPositivo(Object mensaje, String titulo){
+        while (true) {
+            int valor = (int)mtdIngresarNumero(mensaje, titulo);
+            if(valor > 0)
+                return valor;
+            mtdMostrarMensajeError("DEBE SER UN VALOR POSITIVO");
+        }
+    }
+
     int mtdIngresarMayorA3(Object mensaje, String titulo){
         while (true) {
             int valor = (int)mtdIngresarNumero(mensaje, titulo);
@@ -61,12 +115,47 @@ public class JuegosRicardoSanjur {
         }
     }
 
+    int mtdIngresarMayorA5(Object mensaje, String titulo){
+        while (true) {
+            int valor = (int)mtdIngresarNumero(mensaje, titulo);
+            if(valor >= 5)
+                return valor;
+            mtdMostrarMensajeError("DEBE SER UN VALOR MAYOR O IGUAL A 5");
+        }
+    }
+
     int mtdIngresarImpar(Object mensaje, String titulo){
         while (true) {
             int valor = (int)mtdIngresarMayorA3(mensaje, titulo);
             if(valor % 2 == 1)
                 return valor;
             mtdMostrarMensajeError("DEBE SER UN VALOR IMPAR");
+        }
+    }
+
+    Forma mtdElegirForma(Object mensaje, String titulo){
+        while(true){
+            int opcion = JOptionPane.showOptionDialog(
+                null, mensaje, titulo, 
+                JOptionPane.NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, 
+                "X; Cuadrado; Cruz; X y Cuadrado; X y Cruz; Cuadrado y Cruz; X, Cuadrado y Cruz".split("; "), 
+                0);
+            switch (opcion) {
+                case 0:
+                    return Forma.X;    
+                case 1:
+                    return Forma.Cuadrado;
+                case 2:
+                    return Forma.Cruz;
+                case 3:
+                    return Forma.X_Cuadrado;
+                case 4:
+                    return Forma.X_Cruz;
+                case 5:
+                    return Forma.Cuadrado_Cruz;
+                case 6:
+                    return Forma.X_Cruz_Cuadrado;
+            }
         }
     }
 }
