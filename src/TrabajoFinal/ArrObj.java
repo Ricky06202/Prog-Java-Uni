@@ -1,33 +1,25 @@
 package TrabajoFinal;
 
 class ArrObj{
-    String tomo;
-    int folio;
-    int asiento;
-    NombreCompleto nombreCompleto;
-    Notas parciales;
-    Notas laboratorios;
-    int semestral;
-
+    private Cedula cedula;
+    private NombreCompleto nombreCompleto;
+    private Notas parciales, laboratorios;
+    private int semestral;
     
-
     /**
-     * @param tomo
-     * @param folio
-     * @param asiento
+     * @param cedula
      * @param nombreCompleto
      * @param parciales
      * @param laboratorios
      * @param semestral
      */
-    public ArrObj(String tomo, int folio, int asiento, NombreCompleto nombreCompleto, Notas parciales,
-            Notas laboratorios, int semestral) {
-        this.tomo = tomo;
-        this.folio = folio;
-        this.asiento = asiento;
+    public ArrObj(Cedula cedula, NombreCompleto nombreCompleto, Notas parciales, Notas laboratorios, int semestral) {
+        this.cedula = cedula;
         this.nombreCompleto = nombreCompleto;
         this.parciales = parciales;
         this.laboratorios = laboratorios;
         this.semestral = semestral;
     }
+
+    
 }
