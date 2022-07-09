@@ -28,7 +28,7 @@ public class ArrObj{
 
     @Override
     public String toString() {
-        return String.format("%-23s %-40s %6d %18s", 
+        return String.format("%-23s %-40s %6d %18s\n\n", 
         cedula.toString(), nombreCompleto.toString(), 
         promedio, notaLetra);
     }

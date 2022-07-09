@@ -19,6 +19,6 @@ public class ClsCalculo {
         promedio >= 81 ? "B" : 
         promedio >= 71 ? "C" :
         promedio >= 61 ? "D" :
-        promedio >= 0 ? "F" : "SE";
+        promedio > 0 ? "F" : "SE";
     }
 }
