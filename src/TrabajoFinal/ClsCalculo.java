@@ -3,15 +3,15 @@ package TrabajoFinal;
 public class ClsCalculo {
     int mtdPromedio(Notas parciales, Notas laboratorios, int semestral){
         parciales.setPorcentaje(30);
-        int promedio = parciales.getPromedio();
+        float promedio = parciales.getPromedio();
 
         laboratorios.setPorcentaje(35);
         promedio += laboratorios.getPromedio();
 
-        float porcentajeSemestral = 35 / 100;
-        promedio += semestral *porcentajeSemestral;
+        float porcentajeSemestral = 35 / 100f;
+        promedio += semestral * porcentajeSemestral;
         
-        return promedio;
+        return (int)promedio;
     }
     
     String mtdNota(int promedio){

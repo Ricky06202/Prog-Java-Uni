@@ -1,8 +1,10 @@
 package TrabajoFinal;
 
+import java.util.Arrays;
+
 class Cedula{
 // son las partes de las cedula
-    private String tomo;
+    private char[] tomo;
     private int folio, asiento;
     
     /**
@@ -11,13 +13,23 @@ class Cedula{
      * @param asiento
      */
     public Cedula(String tomo, int folio, int asiento) {
-        this.tomo = tomo;
+        this.tomo = tomo.toCharArray();
         this.folio = folio;
         this.asiento = asiento;
     }
     
     @Override
     public String toString() {
-        return String.format("Cedula: %s-%d-%d\n", tomo, folio, asiento);
+        return String.format("%s-%d-%d", getTomo(), folio, asiento);
     }
+
+    /**
+     * @return the tomo
+     */
+    public String getTomo() {
+        return Arrays.toString(tomo)
+            .replace("[", "")
+            .replace(", ", "")
+            .replace("]", "");
+    }  
 }

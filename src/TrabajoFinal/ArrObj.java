@@ -1,10 +1,12 @@
 package TrabajoFinal;
 
-class ArrObj{
+public class ArrObj{
     private Cedula cedula;
     private NombreCompleto nombreCompleto;
     private Notas parciales, laboratorios;
     private int semestral;
+    private int promedio;
+    private String notaLetra;
     
     /**
      * @param cedula
@@ -19,7 +21,16 @@ class ArrObj{
         this.parciales = parciales;
         this.laboratorios = laboratorios;
         this.semestral = semestral;
+        var calculo = new ClsCalculo();
+        promedio = calculo.mtdPromedio(this.parciales, this.laboratorios, this.semestral);
+        notaLetra = calculo.mtdNota(promedio);
     }
 
+    @Override
+    public String toString() {
+        return String.format("%-23s %-40s %6d %18s", 
+        cedula.toString(), nombreCompleto.toString(), 
+        promedio, notaLetra);
+    }
     
 }

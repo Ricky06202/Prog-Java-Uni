@@ -19,10 +19,10 @@ class Notas{
      * @param porcentaje the porcentaje to set
      */
     public void setPorcentaje(int porcentaje) {
-        this.porcentaje = porcentaje/100;
+        this.porcentaje = porcentaje/300f;
     }
 
-    public int getPromedio(){
-        return (int)((nota1 + nota2 + nota3) / 3.0 * porcentaje);
+    public float getPromedio(){
+        return (nota1 + nota2 + nota3) * porcentaje;
     }
 }
