@@ -8,8 +8,8 @@ import javax.swing.JOptionPane;
 public class ClsNotas {
     public static void main(String[] args) {
         var funciones = new ClsNotas();
-        var estudiantes = new ArrObj[5];
         final int cantidadEstudiantes = 2;
+        var estudiantes = new ArrObj[cantidadEstudiantes];
         for (int contador = 0; contador < cantidadEstudiantes; contador++) {
             String tomo = funciones.mtdIngresarTexto("Ingrese el Numero de Tomo de su Cedula", "INGRESAR TOMO",2);
             int folio = funciones.mtdIngresarPositivo("Ingrese el Numero de Folio de su Cedula", "INGRESAR FOLIO");
