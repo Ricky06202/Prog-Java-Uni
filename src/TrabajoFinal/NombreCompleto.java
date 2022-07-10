@@ -2,7 +2,7 @@ package TrabajoFinal;
 
 import java.util.Arrays;
 
-class NombreCompleto {
+public class NombreCompleto {
     private char[] nombre1, apellido1, 
     nombre2, apellido2;
 

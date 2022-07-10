@@ -1,6 +1,6 @@
 package TrabajoFinal;
 
-class Notas{
+public class Notas{
     private int nota1, nota2, nota3;
     private float porcentaje;
 

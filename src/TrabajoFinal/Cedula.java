@@ -2,7 +2,7 @@ package TrabajoFinal;
 
 import java.util.Arrays;
 
-class Cedula{
+public class Cedula{
 // son las partes de las cedula
     private char[] tomo;
     private int folio, asiento;
