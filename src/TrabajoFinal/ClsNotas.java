@@ -90,7 +90,7 @@ public class ClsNotas {
         
             String texto = JOptionPane.showInputDialog(null, mensaje, titulo, JOptionPane.INFORMATION_MESSAGE);
             if(texto != null && !texto.trim().isEmpty())
-                return texto;
+                return texto.trim();
             mtdMostrarMensajeError("NO PUEDE DEJAR VACIO ESTE CAMPO DE TEXTO","ERROR TEXTO INVALIDO");
         
         }
@@ -104,5 +104,4 @@ public class ClsNotas {
             mtdMostrarMensajeError("LIMITE DE CARACTERES EXCEDIDO, NO PUEDE INGRESAR MAS DE " + limiteCaracteres + " CARACTERES","ERROR TEXTO INVALIDO");
         }
     }
-
 }
