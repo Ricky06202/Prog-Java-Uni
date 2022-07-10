@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 public class ClsNotas {
     public static void main(String[] args) {
         var funciones = new ClsNotas();
-        final int cantidadEstudiantes = 2;
+        final int cantidadEstudiantes = 5;
         var estudiantes = new ArrObj[cantidadEstudiantes];
         for (int contador = 0; contador < cantidadEstudiantes; contador++) {
             String tomo = funciones.mtdIngresarTexto("Ingrese el Numero de Tomo de su Cedula", "INGRESAR TOMO",2);
@@ -40,8 +40,7 @@ public class ClsNotas {
         "                          Registro General de los Estudiantes\n\n"+
         "    CEDULA              NOMBRE COMPLETO                  PROMEDIO    NOTA FINAL\n\n";
         for (ArrObj estudiante : estudiantes) 
-            if(estudiante != null)
-                registroGeneral += estudiante.toString();
+            registroGeneral += estudiante.toString();
         funciones.mtdMostrarMensaje(registroGeneral, "REGISTRO GENERAL");
     }
 
